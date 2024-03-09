@@ -17,7 +17,8 @@ def resolve_operator(symbol):
     return {
         "+": _add,
         "-": _subtract,
-        "*": _multiply
+        "*": _multiply,
+        "^": __power
     }[symbol]
 
 
@@ -42,3 +43,6 @@ def _multiply(a, b):
 
 def _subtract(a, b):
     return a - b
+
+def __power(a, n):
+    return a ** n
