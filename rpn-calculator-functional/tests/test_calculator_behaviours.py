@@ -10,4 +10,6 @@ def test_simple_multiplication():
     assert 6 == calculate("2 3 *")
     assert 12 == calculate("3 4 *")
     assert 21 == calculate("3 7 *")
-    
+
+def test_simple_subtraction():
+    assert 1 == calculate("4 3 -")

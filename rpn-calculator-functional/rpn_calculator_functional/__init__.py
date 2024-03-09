@@ -6,15 +6,19 @@ def calculate(equation):
         symbol = symbols.pop(0)
         if type(symbol) == type(""):
             operator = resolve_operator(symbol)
-            return operator(stack.pop(), stack.pop())
+            b = stack.pop()
+            a = stack.pop()
+            return operator(a, b)
         else:
             stack += [symbol]
 
 
 def resolve_operator(symbol):
-    if symbol == "+":
-        return _add
-    return _multiply
+    return {
+        "+": _add,
+        "-": _subtract,
+        "*": _multiply
+    }[symbol]
 
 
 def parse_symbols(equation):
@@ -34,3 +38,7 @@ def _add(a, b):
 
 def _multiply(a, b):
     return a * b
+
+
+def _subtract(a, b):
+    return a - b
