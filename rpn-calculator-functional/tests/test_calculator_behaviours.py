@@ -1,2 +1,4 @@
+from rpn_calculator_functional import *
+
 def test_test():
-  pass
+  assert 3 == calculate("1 2 +")
