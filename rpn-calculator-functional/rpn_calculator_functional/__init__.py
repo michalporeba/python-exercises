@@ -8,7 +8,7 @@ def calculate(equation):
     while len(symbols) > 0:
         symbol = symbols.pop(0)
         if type(symbol) == type(""):
-            operator = resolve_operator(symbol)
+            operator = _resolve_operator(symbol)
             (result, stack) = _process_operator(operator, stack)
             if len(symbols) == 0:
                 return result
@@ -26,7 +26,7 @@ def _process_operator(operator, stack):
     return (operator(*parameters), stack)
 
 
-def resolve_operator(symbol):
+def _resolve_operator(symbol):
     return {
         "+": _add,
         "-": _subtract,
