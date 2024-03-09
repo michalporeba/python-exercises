@@ -18,4 +18,8 @@ def test_simple_subtraction():
     assert -1 == calculate("3 4 -")
 
 def test_simple_power_of():
+    assert 1 == calculate("2 0 ^")
+    assert 2 == calculate("2 1 ^")
     assert 4 == calculate("2 2 ^")
+    assert 8 == calculate("2 3 ^")
+    assert 16 == calculate("2 4 ^")
