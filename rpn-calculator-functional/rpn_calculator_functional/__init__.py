@@ -1,5 +1,16 @@
 def calculate(equation):
-  symbols = equation.split()
-  if symbols[0] == "1":
-    return 3
-  return 4
+  symbols = parse_symbols(equation)
+
+  return symbols[0] + symbols[1]
+
+def parse_symbols(equation):
+  return [parse_symbol(s) for s in equation.split()]
+
+def parse_symbol(symbol):
+  try:
+    return int(symbol)
+  except:
+    return _add
+  
+def _add():
+  pass
