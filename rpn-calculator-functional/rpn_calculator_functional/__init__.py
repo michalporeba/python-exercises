@@ -4,9 +4,9 @@ def calculate(equation):
   return symbols[0] + symbols[1]
 
 def parse_symbols(equation):
-  return [parse_symbol(s) for s in equation.split()]
+  return [_parse_symbol(s) for s in equation.split()]
 
-def parse_symbol(symbol):
+def _parse_symbol(symbol):
   try:
     return int(symbol)
   except:
