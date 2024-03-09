@@ -1,14 +1,16 @@
 from inspect import signature
 from math import sqrt 
 
-def calculate(equation):
+def calculate(equation, custom_operators = {}):
     symbols = parse_symbols(equation)
     stack = []
+    operators = _get_default_operators()
+    operators.update(custom_operators)
 
     while len(symbols) > 0:
         symbol = symbols.pop(0)
         if type(symbol) == type(""):
-            operator = _resolve_operator(symbol)
+            operator = _resolve_operator(symbol, operators)
             (result, stack) = _process_operator(operator, stack)
             if len(symbols) == 0:
                 return result
@@ -16,6 +18,16 @@ def calculate(equation):
                 stack += [result]
         else:
             stack += [symbol]
+
+
+def _get_default_operators():
+    return {
+        "+": _add,
+        "-": _subtract,
+        "*": _multiply,
+        "^": _power,
+        "sqrt": _square_root
+    }
 
 
 def _process_operator(operator, stack):
@@ -26,14 +38,8 @@ def _process_operator(operator, stack):
     return (operator(*parameters), stack)
 
 
-def _resolve_operator(symbol):
-    return {
-        "+": _add,
-        "-": _subtract,
-        "*": _multiply,
-        "^": _power,
-        "sqrt": _square_root
-    }[symbol]
+def _resolve_operator(symbol, operators):
+    return operators[symbol]
 
 
 def parse_symbols(equation):

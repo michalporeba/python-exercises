@@ -30,3 +30,9 @@ def test_square_root_as_reverse_of_square():
 
 def test_complex_operations():
     assert 5 == calculate("2 3 + 8 3 - * sqrt")
+
+def test_custom_operators():
+    def modulo(a, b):
+        return a % b
+    
+    assert 1 == calculate("6 5 %", { "%": modulo})
