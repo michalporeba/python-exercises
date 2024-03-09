@@ -17,8 +17,14 @@ def _parse_symbol(symbol):
     try:
         return int(symbol)
     except:
-        return _add
+        if symbol == "+":
+          return _add
+        return _multiply
 
 
 def _add(a, b):
     return a + b
+
+
+def _multiply(a, b):
+    return a * b
