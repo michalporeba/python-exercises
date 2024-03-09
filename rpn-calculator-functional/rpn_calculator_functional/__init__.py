@@ -3,10 +3,18 @@ def calculate(equation):
     stack = []
 
     while len(symbols) > 0:
-        if callable(symbols[0]):
-            return symbols[0](stack.pop(), stack.pop())
+        symbol = symbols.pop(0)
+        if type(symbol) == type(""):
+            operator = resolve_operator(symbol)
+            return operator(stack.pop(), stack.pop())
         else:
-            stack += [symbols.pop(0)]
+            stack += [symbol]
+
+
+def resolve_operator(symbol):
+    if symbol == "+":
+        return _add
+    return _multiply
 
 
 def parse_symbols(equation):
@@ -17,9 +25,7 @@ def _parse_symbol(symbol):
     try:
         return int(symbol)
     except:
-        if symbol == "+":
-          return _add
-        return _multiply
+        return symbol
 
 
 def _add(a, b):
