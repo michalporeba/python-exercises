@@ -24,7 +24,9 @@ def test_simple_power_of():
     assert 8 == calculate("2 3 ^")
     assert 16 == calculate("2 4 ^")
 
-
 def test_square_root_as_reverse_of_square():
     assert 2 != calculate("2 2 ^")
     assert 2 == calculate("2 2 ^ sqrt")
+
+def test_complex_operations():
+    assert 5 == calculate("2 3 + 8 3 - * sqrt")

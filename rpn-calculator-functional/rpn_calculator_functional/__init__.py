@@ -1,14 +1,11 @@
 from inspect import signature
+from math import sqrt 
 
 def calculate(equation):
     symbols = parse_symbols(equation)
     stack = []
 
     while len(symbols) > 0:
-        print("---")
-        print(symbols)
-        print(stack)
-
         symbol = symbols.pop(0)
         if type(symbol) == type(""):
             operator = resolve_operator(symbol)
@@ -65,4 +62,4 @@ def _power(a, n):
     return a ** n
 
 def _square_root(a):
-    return a ** 1/2
+    return sqrt(a)
