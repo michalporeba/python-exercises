@@ -1,7 +1,8 @@
 from inspect import signature
-from math import sqrt 
+from math import sqrt
 
-def calculate(equation, custom_operators = {}):
+
+def calculate(equation, custom_operators={}):
     symbols = parse_symbols(equation)
     stack = []
     operators = _get_default_operators()
@@ -9,7 +10,7 @@ def calculate(equation, custom_operators = {}):
 
     while len(symbols) > 0:
         symbol = symbols.pop(0)
-        if type(symbol) == type(""):
+        if type(symbol) is str:
             operator = _resolve_operator(symbol, operators)
             (result, stack) = _process_operator(operator, stack)
             if len(symbols) == 0:
@@ -49,7 +50,7 @@ def parse_symbols(equation):
 def _parse_symbol(symbol):
     try:
         return int(symbol)
-    except:
+    except: # noqa: E722
         return symbol
 
 
@@ -64,8 +65,10 @@ def _multiply(a, b):
 def _subtract(a, b):
     return a - b
 
+
 def _power(a, n):
     return a ** n
+
 
 def _square_root(a):
     return sqrt(a)
