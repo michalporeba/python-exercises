@@ -1,16 +1,32 @@
+from inspect import signature
+
 def calculate(equation):
     symbols = parse_symbols(equation)
     stack = []
 
     while len(symbols) > 0:
+        print("---")
+        print(symbols)
+        print(stack)
+
         symbol = symbols.pop(0)
         if type(symbol) == type(""):
             operator = resolve_operator(symbol)
-            b = stack.pop()
-            a = stack.pop()
-            return operator(a, b)
+            (result, stack) = _process_operator(operator, stack)
+            if len(symbols) == 0:
+                return result
+            else:
+                stack += [result]
         else:
             stack += [symbol]
+
+
+def _process_operator(operator, stack):
+    parameters = []
+    for _ in signature(operator).parameters:
+        parameters = [stack.pop()] + parameters
+
+    return (operator(*parameters), stack)
 
 
 def resolve_operator(symbol):
@@ -18,7 +34,8 @@ def resolve_operator(symbol):
         "+": _add,
         "-": _subtract,
         "*": _multiply,
-        "^": __power
+        "^": _power,
+        "sqrt": _square_root
     }[symbol]
 
 
@@ -44,5 +61,8 @@ def _multiply(a, b):
 def _subtract(a, b):
     return a - b
 
-def __power(a, n):
+def _power(a, n):
     return a ** n
+
+def _square_root(a):
+    return a ** 1/2
